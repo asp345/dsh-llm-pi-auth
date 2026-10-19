@@ -14,7 +14,7 @@ This plugin gives dsh a `CredentialStore` backed by the pi file. pi-ai refreshes
 dsh plugin --profile web add github:asp345/dsh-llm-pi-auth
 ```
 
-The lockfile pins the commit it resolved; a later commit needs `dsh plugin --profile web update dsh-llm-pi-auth`. For a local checkout, `link:/abs/path/to/dsh-llm-pi-auth` keeps the profile pointing at that directory.
+`dsh plugin --profile web update dsh-llm-pi-auth` picks up later commits. For a local checkout, `link:/abs/path/to/dsh-llm-pi-auth` keeps the profile pointing at that directory.
 
 The routes this plugin registers are owned by it, so `@deepseek-ai/dsh-llm-pi-ai` must stop declaring the same ids. Restate its row without them:
 
