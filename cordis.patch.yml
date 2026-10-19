@@ -1,0 +1,3 @@
+- insert:
+    - id: llm-pi-auth
+      name: dsh-llm-pi-auth
