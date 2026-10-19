@@ -29,10 +29,16 @@ A model missing from the catalog cannot be reached by editing this plugin's conf
 The package declares a profile bundle (`dsh.bundle.patch`), so the loader row is inserted on install.
 
 ```bash
-dsh plugin --profile web add link:/abs/path/to/dsh-llm-pi-auth
+dsh plugin --profile web add github:asp345/dsh-llm-pi-auth
 ```
 
-`link:` keeps the profile pointing at this working copy; `file:` copies the package into the profile and needs a reinstall after every edit.
+`dsh plugin` forwards its arguments to pnpm, so any pnpm spec is accepted. The GitHub spec resolves to the default branch and the lockfile pins the commit it resolved, for example `https://codeload.github.com/asp345/dsh-llm-pi-auth/tar.gz/<sha>`. A commit pushed later is not picked up until the dependency is re-resolved:
+
+```bash
+dsh plugin --profile web update dsh-llm-pi-auth
+```
+
+`git+https://github.com/asp345/dsh-llm-pi-auth` installs the same thing; pnpm stores it in the `github:` form. To work on a local checkout instead, `link:/abs/path/to/dsh-llm-pi-auth` keeps the profile pointing at that directory, whereas `file:` copies the package in and needs a reinstall after every edit.
 
 The routes this plugin registers are owned by this plugin, so `@deepseek-ai/dsh-llm-pi-ai` must stop declaring the same ids in its `providers` dict. Restate the profile's `llm-pi-ai` row without them:
 
